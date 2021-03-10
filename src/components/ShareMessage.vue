@@ -1,10 +1,42 @@
 <template>
   <div class="share">
         <p>シェア</p>
-        <input type="text" id="share-text">
-        <button>シェアする</button>
+        <input type="text" id="share-text" v-model="share">
+        <button @click="send">シェアする</button>
       </div>
 </template>
+
+<script>
+import axios from "axios";
+export default {
+  data(){
+    return{
+      share:"",
+    }
+  },
+  methods: {
+    send() {
+      if (this.share == ""){
+        alert("シェアする内容を入力してください");
+      }else{
+        axios.post("https://evening-eyrie-52589.herokuapp.com/api/shares", {
+          user_id: this.$store.state.user.id,
+          share: this.share
+        })
+        .then((res) => {
+          console.log(res);
+          alert("シェアしました");
+          this.share = "";
+          this.$router.go({
+            path: this.$router.currentRoute.path,
+            force: true,
+          })
+        })
+      }
+    }
+  }
+}
+</script>
 
 <style scoped>
 .share{

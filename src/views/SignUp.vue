@@ -5,11 +5,11 @@
       <div class="sign-card">
         <form action="" id="sign-form">
           <h1>新規登録</h1>
-          <input type="text" name="name" placeholder="ユーザーネーム">
-          <input type="text" name="profile" placeholder="プロフィール">
-          <input type="email" name="email" placeholder="メールアドレス">
-          <input type="password" name="password" placeholder="パスワード">
-          <button>ログイン</button>
+          <input type="text" name="name" placeholder="ユーザーネーム" v-model="name">
+          <input type="text" name="profile" placeholder="プロフィール" v-model="profile">
+          <input type="email" name="email" placeholder="メールアドレス" v-model="email">
+          <input type="password" name="password" placeholder="パスワード" v-model="password">
+          <button @click="auth">ログイン</button>
         </form>
       </div>
     </div>
@@ -18,9 +18,36 @@
 
 <script>
 import Header from "../components/Header"
+import axios from "axios"
 export default {
+  data(){
+    return{
+      name:"",
+      profile:"",
+      email:"",
+      password:""
+    }
+  },
   components:{
     Header
+  },
+  methods: {
+    auth(){
+      axios
+        .post("https://evening-eyrie-52589.herokuapp.com/api/register",{
+          name: this.name,
+          profile: this.profile,
+          email: this.email,
+          password: this.password
+        })
+        .then(response => {
+          console.log(response);
+          this.$router.replace("/");
+        })
+        .catch(error => {
+          alert(error);
+        })
+    }
   }
 }
 </script>

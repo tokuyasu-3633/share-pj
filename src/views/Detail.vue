@@ -7,13 +7,23 @@
       <div id="home-title">
         <h1>ホーム</h1>
       </div>
-      <Message></Message>
-      <div class="comment-box">
-        <p>コメント</p>
-      </div>
-      <div class="comment-in">
-        <input type="text" name="comment">
-      <button>コメント</button>
+      <Message :id="id"></Message>
+      <div>
+        <div class="comment-box">
+          <p>コメント</p>
+        </div>
+        <div class="message" v-for="(comment, index) in data" :key="index">
+          <div class="flex">
+            <p class="name">{{ comment.comment_user.name }}</p>
+          </div>
+          <div>
+            <p class="text">{{ comment.comment.content }}</p>
+          </div>
+        </div>
+        <div class="comment-in" >
+          <input type="text" name="comment" v-model="content">
+          <button @click="send">コメント</button>
+        </div>
       </div>
     </div>
   </div>
@@ -22,7 +32,40 @@
 <script>
 import Sidenavi from "../components/SideNavi"
 import Message from '../components/Message.vue'
+import axios from 'axios'
 export default {
+  data() {
+    return{
+      content: "",
+      data: ""
+    }
+  },
+  methods:{
+    send() {
+      axios.post("https://evening-eyrie-52589.herokuapp.com/api/comment", {
+        share_id: this.id,
+        user_id: this.$store.state.user.id,
+        content: this.content
+      })
+      .then((res) => {
+        console.log(res);
+        this.content = ""
+        this.$router.go({
+          path: this.$router.currentRoute.path,
+          force: true
+        })
+      })
+    },
+    comment(){
+      axios.get("https://evening-eyrie-52589.herokuapp.com/api/shares/" + this.id)
+      .then((res) => {
+        this.data = res.data.comment;
+      })
+    }
+  },
+  created() {
+    this.comment()
+  },
   components:{
     Sidenavi,
     Message

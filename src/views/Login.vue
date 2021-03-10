@@ -5,9 +5,9 @@
       <div class="login-card">
         <form action="" id="login-form">
           <h1>ログイン</h1>
-          <input type="email" name="email" placeholder="メールアドレス">
-          <input type="password" name="password" placeholder="パスワード">
-          <button>ログイン</button>
+          <input type="email" name="email" placeholder="メールアドレス" v-model="email">
+          <input type="password" name="password" placeholder="パスワード" v-model="password">
+          <button @click="auth">ログイン</button>
         </form>
       </div>
     </div>
@@ -17,8 +17,22 @@
 <script>
 import Header from "../components/Header"
 export default {
+  data(){
+    return{
+      email: "",
+      password: ""
+    }
+  },
   components:{
     Header
+  },
+  methods: {
+    auth() {
+      this.$store.dispatch("login", {
+        email: this.email,
+        password: this.password
+      })
+    }
   }
 }
 </script>

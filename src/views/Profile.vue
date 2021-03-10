@@ -7,10 +7,11 @@
       </div>
       <div class="profile-box">
         <div>
-          <h1>{{shareLists.name}}</h1>
-          <p>{{shareLists.text}}</p>
+          <h1>{{name}}</h1>
+          <p v-if="active">{{profile}}</p>
+          <input type="text" v-model="profile" v-else>
         </div>
-        <button>変更する</button>
+        <button @click="edit">変更する</button>
       </div>
       <Message></Message>
     </div>
@@ -20,14 +21,30 @@
 <script>
 import Sidenavi from "../components/SideNavi"
 import Message from '../components/Message.vue'
+import axios from "axios"
 export default {
   data(){
     return{
-      shareLists:
-        {
-          name: "太郎",
-          text: 'こんにちわ！俺の名前は太郎！'
-        }
+      active: true,
+      name: this.$store.state.user.name,
+      text: this.$store.state.user.profile
+    }
+  },
+  methods: {
+    edit(){
+      if (!this.active) {
+        axios.put("https://evening-eyrie-52589.herokuapp.com/api/user", {
+          email: this.$store.state.user.email,
+          profile: this.profile
+        })
+        .then((res) => {
+          this.$store.dispatch("changeUserData", {
+            profile: this.profile,
+          })
+          console.log(res)
+        })
+      }
+      this.active = !this.active;
     }
   },
   components:{
