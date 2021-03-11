@@ -15,7 +15,7 @@
             v-if="profile"
             >
           </div>
-          <p>{{value.text}}</p>
+          <p>{{value.item.share}}</p>
         </li>
       </ul>
 </template>
@@ -23,6 +23,7 @@
 <script>
 import axios from "axios"
 export default {
+  props: ["id"],
   data(){
     return{
       shares: [],
@@ -123,6 +124,7 @@ export default {
   border-top: none;
   border-right: none;
   padding: 10px 20px;
+  color: white;
 }
 .small-box{
   display: flex;

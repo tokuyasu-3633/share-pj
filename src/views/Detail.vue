@@ -34,6 +34,7 @@ import Sidenavi from "../components/SideNavi"
 import Message from '../components/Message.vue'
 import axios from 'axios'
 export default {
+  props: ["id"],
   data() {
     return{
       content: "",
@@ -117,8 +118,37 @@ padding: 20px 0;
   background: rgb(16, 6, 31);
   border: 0.5px solid white;
   border-radius: 10px;
+  color: white;
 }
 .comment-in button{
   margin: 10px 0 0 87%;
+}
+.share-message {
+  border-bottom: 1px solid white;
+}
+.comment-title {
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid white;
+  border-left: 1px solid white;
+}
+.comment input {
+  width: 95%;
+  height: 30px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  margin-left: 10px;
+  border-radius: 10px;
+  border: 1px solid white;
+  background-color: #15202b;
+  color: white;
+}
+.message {
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid white;
+  border-left: 1px solid white;
 }
 </style>

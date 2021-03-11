@@ -3,15 +3,15 @@
       <div class="menu">
         <img src="../assets/logo.png" class="menu-logo">
         <ul class="menu-list">
-          <li>
+          <li @click="$router.push('/home')">
             <img src="../assets/home.png">
             <p>ホーム</p>
           </li>
-          <li>
+          <li @click="$router.push('/profile')">
             <img src="../assets/profile.png">
             <p>プロフィール</p>
           </li>
-          <li>
+          <li @click="$store.dispatch('logout')">
             <img src="../assets/logout.png">
             <p>ログアウト</p>
           </li>

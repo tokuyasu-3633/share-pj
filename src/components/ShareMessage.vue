@@ -1,7 +1,7 @@
 <template>
   <div class="share">
         <p>シェア</p>
-        <input type="text" id="share-text" v-model="share">
+        <textarea name="text" cols="30" rows="10" id="share-text" v-model="share"></textarea>
         <button @click="send">シェアする</button>
       </div>
 </template>
@@ -49,6 +49,7 @@ export default {
   border-radius: 10px;
   border: white solid 1px;
   margin: 10px 0;
+  color: white;
 }
 .share button{
   margin-left: 280px;

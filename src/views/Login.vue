@@ -3,12 +3,12 @@
     <Header></Header>
     <div class="login">
       <div class="login-card">
-        <form action="" id="login-form">
+        <div id="login-form">
           <h1>ログイン</h1>
           <input type="email" name="email" placeholder="メールアドレス" v-model="email">
           <input type="password" name="password" placeholder="パスワード" v-model="password">
           <button @click="auth">ログイン</button>
-        </form>
+        </div>
       </div>
     </div>
   </div>
