@@ -84,6 +84,9 @@ export default {
   border-top: none;
   border-right: none;
 }
+.profile-box p{
+  color: white;
+}
 .profile-box h1{
   margin-bottom: 10px;
   font-size: 25px;
