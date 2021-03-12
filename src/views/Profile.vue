@@ -8,7 +8,7 @@
       <div class="profile-box">
         <div>
           <h1>{{name}}</h1>
-          <p v-if="active">{{profile}}</p>
+          <p v-if="active">{{text}}</p>
           <input type="text" v-model="profile" v-else>
         </div>
         <button @click="edit">変更する</button>
